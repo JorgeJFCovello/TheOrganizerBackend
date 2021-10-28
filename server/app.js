@@ -2,12 +2,18 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
 
+const {connectDB} = require('../database/config')
+
 class Server {
     constructor() {
         this.app = express()
+        this.initializeDB()
         this.middleware()
         this.routes()
         this.start()
+    }
+    initializeDB(){
+        connectDB()
     }
 
     middleware() {
