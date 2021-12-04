@@ -20,10 +20,6 @@ const authenticate = (req,resp) => {
 
 const createUser = async(req, resp) => {
 
-        const err = validationResult(req)
-        if(!err.isEmpty()){
-            return resp.status(400).json(err)
-        }
         const {username, name, email, surname, password} = req.body;
         const usuario = new Usuario({username, name, email, surname, password})
         usuario.password = getEncryptedPassword(password)
