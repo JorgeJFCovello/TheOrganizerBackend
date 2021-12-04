@@ -23,7 +23,6 @@ const createUser = async(req, resp) => {
         const {username, name, email, surname, password} = req.body;
         const usuario = new Usuario({username, name, email, surname, password})
         usuario.password = getEncryptedPassword(password)
-        console.log(usuario)
         await usuario.save()
         resp.status(200).json({msg: 'User created successfully'})
 }
