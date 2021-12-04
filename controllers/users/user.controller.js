@@ -1,6 +1,5 @@
-const Usuario = require('../../models/ModelSchemas/user')
+const User = require('../../models/ModelSchemas/user')
 const bcrypt = require('bcryptjs')
-const { validationResult } = require('express-validator')
 
 const authenticate = (req,resp) => {
     try {
@@ -21,20 +20,19 @@ const authenticate = (req,resp) => {
 const createUser = async(req, resp) => {
 
         const {username, name, email, surname, password} = req.body;
-        const usuario = new Usuario({username, name, email, surname, password})
-        usuario.password = getEncryptedPassword(password)
-        await usuario.save()
+        const user = new User({username, name, email, surname, password})
+        user.password = getEncryptedPassword(password)
+        await user.save()
         resp.status(200).json({msg: 'User created successfully'})
 }
 const updateUser = async(req, resp) => {
 
     const { id } = req.params;
-    const {google, password, ... others} = req.body;
-    const usuario = await Usuario.findByIdAndUpdate(id, others);
+    const {_id, google, password, ... others} = req.body;
     if (password) {
-        usuario.password = getEncryptedPassword(password)
+        others.password = getEncryptedPassword(password)
     }
-    await usuario.save()
+    const user = await User.findByIdAndUpdate(id, others);
     resp.status(200).json({msg: 'User updated successfully'})
 }
 

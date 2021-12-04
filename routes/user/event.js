@@ -8,7 +8,7 @@ const {
 
 router.post('/event',[
     check('name', 'Name must not be empty').not().isEmpty(),
-    check('description', 'description must not be empty').not().isEmpty(),
+    check('description', 'Description must not be empty').not().isEmpty(),
     validateFields
 ], createEvent)
 
