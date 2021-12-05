@@ -40,9 +40,7 @@ const getUsers = async(req, resp) => {
 
     const {limit = 5, page = 1} = req.query
     const condition = {active : true}
-    const [ users, total ] = await 
-     
-    Promise.all([
+    const [ users, total ] = await Promise.all([
         User.find(condition).skip(limit * (page - 1)).limit(Number(limit)),
         countAllUsers = await User.countDocuments(condition)
     ])
@@ -58,7 +56,7 @@ const deleteUser = async(req,resp) => {
 
     const {id} = req.params
     // we should not use User.findByIdAndDelete(id) because we lose all tracked data
-    User.findByIdAndUpdate(id, {active: false}) 
+    await User.findByIdAndUpdate(id, {active: false}) 
 
     resp.status(200).json({
         msg: `User with id ${id} was sucessfully deleted`
