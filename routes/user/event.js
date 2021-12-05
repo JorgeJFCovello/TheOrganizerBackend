@@ -6,6 +6,7 @@ const {
     createEvent
 } = require('../../controllers/event/event.controller')
 
+
 router.post('/event',[
     check('name', 'Name must not be empty').not().isEmpty(),
     check('description', 'Description must not be empty').not().isEmpty(),
