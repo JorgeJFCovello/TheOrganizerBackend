@@ -8,7 +8,7 @@ const {
     deleteEvent,
     updateEvent,
     getEvent
-} = require('../../controllers/event/event.controller')
+} = require('../controllers/event/event.controller')
 
 
 router.post('/event',[

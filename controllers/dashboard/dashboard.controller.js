@@ -2,8 +2,8 @@ const DashBoard = require('../../models/ModelSchemas/dashboard')
 
 const createDashboard = async(req, resp) => {
         const { name, columns, tasks } = req.body;
-        const event = new DashBoard({ name, columns, tasks } )
-        await event.save();
+        const dashboard = new DashBoard({ name, columns, tasks } )
+        await dashboard.save();
         resp.status(200).json({
             msg: `DashBoard ${name} was successfully created`
         })

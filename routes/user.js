@@ -9,7 +9,7 @@ const {
     updateUser,
     getUsers,
     deleteUser
-} = require('../../controllers/users/user.controller')
+} = require('../controllers/users/user.controller')
 
 router.post('/authenticate', authenticate)
 router.post('/user', [

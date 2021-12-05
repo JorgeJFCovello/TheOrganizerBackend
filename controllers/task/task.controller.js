@@ -2,8 +2,8 @@ const Task = require('../../models/ModelSchemas/task')
 
 const createTask = async(req, resp) => {
         const { name, columns, tasks } = req.body;
-        const event = new Task({ name, columns, tasks } )
-        await event.save();
+        const task = new Task({ name, columns, tasks } )
+        await task.save();
         resp.status(200).json({
             msg: `Task ${name} was successfully created`
         })

@@ -5,7 +5,7 @@ const GoalSchema = Schema ({
         type: String,
         required: [true, 'Title is required']
     },
-    Description: {
+    description: {
         type: String,
         required: [true, 'Description is required']
     }, 
@@ -21,7 +21,7 @@ const GoalSchema = Schema ({
         type: Boolean,
         default: true
     },
-    Tasks: {
+    tasks: {
         type: Array,
         default: []
     }
