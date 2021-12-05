@@ -3,7 +3,10 @@ const {check} = require('express-validator')
 const { validateFields } = require('../../middleware/field-validations')
 const router = Router()
 const {
-    createEvent
+    createEvent,
+    deleteEvent,
+    updateEvent,
+    getEvent
 } = require('../../controllers/event/event.controller')
 
 
@@ -13,5 +16,22 @@ router.post('/event',[
     validateFields
 ], createEvent)
 
+router.put('/event/:id',[
+    check('id', 'Invalid ID').isMongoId(),
+    check('id').custom(eventExists),
+    validateFields
+], updateEvent)
+
+router.delete('/event/:id',[
+    check('id', 'Invalid ID').isMongoId(),
+    check('id').custom(eventExists),
+    validateFields
+], deleteEvent)
+
+router.get('/events', [
+    check('limit', 'Limit must be a number').isNumeric(),
+    check('page', 'Page must be a positive number').isNumeric(),
+    validateFields
+], getEvent)
 
 module.exports = router

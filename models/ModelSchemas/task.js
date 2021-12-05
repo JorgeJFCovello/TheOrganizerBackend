@@ -9,6 +9,10 @@ const TaskSchema = Schema ({
         type: String,
         default: ""
     },
+    active: {
+        type: Boolean,
+        default: true
+    },
     date: {
         type: Date,
         required: [true, 'Date is required']

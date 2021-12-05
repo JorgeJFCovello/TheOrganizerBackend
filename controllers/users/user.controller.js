@@ -18,7 +18,7 @@ const authenticate = (req,resp) => {
 }
 
 const createUser = async(req, resp) => {
-        const {username, name, email, surname, password} = req.body;
+        const {username, name, email, surname, password} = req.body
         const user = new User({username, name, email, surname, password})
         user.password = getEncryptedPassword(password)
         await user.save()
@@ -26,12 +26,12 @@ const createUser = async(req, resp) => {
 }
 
 const updateUser = async(req, resp) => {
-    const { id } = req.params;
-    const {_id, google, password, ... others} = req.body;
+    const { id } = req.params
+    const {_id, google, password, ... others} = req.body
     if (password) {
         others.password = getEncryptedPassword(password)
     }
-    const user = await User.findByIdAndUpdate(id, others);
+    const user = await User.findByIdAndUpdate(id, others)
     resp.status(200).json({msg: 'User updated successfully'})
 }
 

@@ -17,6 +17,10 @@ const GoalSchema = Schema ({
         type: String,
         default: null
     },
+    active: {
+        type: Boolean,
+        default: true
+    },
     Tasks: {
         type: Array,
         default: []

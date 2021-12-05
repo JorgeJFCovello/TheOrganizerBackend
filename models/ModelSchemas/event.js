@@ -13,6 +13,10 @@ const EventSchema = Schema ({
         type: String,
         default: ""
     },
+    active: {
+        type: Boolean,
+        default: true
+    },
     task: {
         type: String, //this will contain the task id
         default: null

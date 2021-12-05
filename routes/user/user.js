@@ -1,6 +1,6 @@
 const {Router} = require('express')
 const {check} = require('express-validator')
-const { userExists } = require('../../database/validators/user-validator')
+const { userExists } = require('../../database/validators/existence-validator')
 const { validateFields } = require('../../middleware/field-validations')
 const router = Router()
 const {
