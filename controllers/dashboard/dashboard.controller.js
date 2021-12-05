@@ -1,38 +1,49 @@
-const Dashboard = require('../../models/dashboard')
+const DashBoard = require('../../models/ModelSchemas/dashboard')
 
-const createDashBoard =(req, resp) => {
-
-    try {
-        const { name } = req.body;
-        const dashboard = new Dashboard( name )
-        //TODO Persist dashboard
+const createDashboard = async(req, resp) => {
+        const { name, columns, tasks } = req.body;
+        const event = new DashBoard({ name, columns, tasks } )
+        await event.save();
         resp.status(200).json({
-            msg: `Dashboard ${ name } was successfully created`
+            msg: `DashBoard ${name} was successfully created`
         })
-    } catch (err) {
-        resp.status(400).json({
-            msg: err
-        })
-    }
 }
-const createColumn =(res, req) => {
 
-    try {
-        const { dashboardName, user , columnName } = req.body;
-        const dashboard = findDashboardByUserAndName(user, dashboardName)
-        dashboard.addColumn(columnName)
-        //TODO Persist dashboard
-        resp.status(200).json({
-            msg: `Column ${ columnName } was successfully created in dashboard`
-        })
-    } catch (err) {
-        resp.status(400).json({
-            msg: err
-        })
-    }
+const deleteDashboard = async(req, resp) => {
+
+    const {id} = req.params
+    await DashBoard.findByIdAndUpdate(id, {active: false})
+    resp.status(200).json({
+        msg: `Dashboard with id ${id} was sucessfully delete`
+    })
+
+}
+const updateDashboard = async(req, resp) => {
+    const { id } = req.params
+    const data = req.body
+    await DashBoard.findByIdAndUpdate(id, data)
+    resp.status(200).json({msg: 'Dashboard updated successfully'})
+}
+
+const getDashboard = async(req, resp) => {
+    const {limit=5, page=1} = req.query
+
+    const {dashboards, total} = await Promise.all([
+        DashBoard.find({active:true}).skip(limit * (page - 1)).limit(limit),
+        DashBoard.countDocuments({active:true})
+    ])
+    resp.status(200).json({
+        page,
+        pageSize: limit,
+        total,
+        dashboards
+    })
+
 }
 
 module.exports = {
-    createDashBoard,
-    createColumn
+    createDashboard,
+    deleteDashboard,
+    updateDashboard,
+    getDashboard
 }
