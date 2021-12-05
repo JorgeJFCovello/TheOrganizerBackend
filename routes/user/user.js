@@ -6,7 +6,9 @@ const router = Router()
 const {
     authenticate,
     createUser,
-    updateUser
+    updateUser,
+    getUsers,
+    deleteUser
 } = require('../../controllers/users/user.controller')
 
 router.post('/authenticate', authenticate)
@@ -16,6 +18,18 @@ router.post('/user', [
     check('password', 'Password must not be empty').not().isEmpty(),
     validateFields
 ], createUser)
+
+router.get('/users', [
+    check('limit', 'Limit must be a number').isNumeric(),
+    check('page', 'Page must be a positive number').isNumeric(),
+    validateFields
+], getUsers)
+
+router.delete('/user/:id', [
+    check('id', 'Invalid ID').isMongoId(),
+    check('id').custom(userExists),
+    validateFields
+], deleteUser)
 
 router.put('/user/:id', [
     check('id', 'Invalid ID').isMongoId(),

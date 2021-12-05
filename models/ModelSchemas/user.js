@@ -29,6 +29,10 @@ const UserSchema = Schema ({
     google: {
         type: Boolean,
         default: false
+    },    
+    active: {
+        type: Boolean,
+        default: true
     },
     goals: {
         type: Array,
