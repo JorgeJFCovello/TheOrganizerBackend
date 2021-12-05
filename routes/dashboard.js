@@ -1,14 +1,14 @@
 const {Router} = require('express')
 const router = Router()
 const {check} = require('express-validator')
-const { dashboardExists } = require('../../database/validators/existence-validator')
-const { validateFields } = require('../../middleware/field-validations')
+const { dashboardExists } = require('../database/validators/existence-validator')
+const { validateFields } = require('../middleware/field-validations')
 const {
     createDashboard,
     deleteDashboard,
     updateDashboard,
     getDashboard
-} = require('../../controllers/dashboard/dashboard.controller')
+} = require('../controllers/dashboard/dashboard.controller')
 
 
 
