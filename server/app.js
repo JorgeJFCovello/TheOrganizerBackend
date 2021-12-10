@@ -22,10 +22,11 @@ class Server {
     }
 
     routes() {
-        this.app.use('/api', require('../routes/user/user'))
-        this.app.use('/api', require('../routes/user/dashboard'))
-        this.app.use('/api', require('../routes/user/goal'))
-        this.app.use('/api', require('../routes/user/event'))
+        this.app.use('/api', require('../routes/user'))
+        this.app.use('/api', require('../routes/dashboard'))
+        this.app.use('/api', require('../routes/goal'))
+        this.app.use('/api', require('../routes/event'))
+        this.app.use('/api', require('../routes/auth'))
     }
 
     start() {

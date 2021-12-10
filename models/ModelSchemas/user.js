@@ -5,6 +5,11 @@ const UserSchema = Schema ({
         type: String,
         required: [true, 'Username is required']
     },
+    role: {
+        type: String,
+        required: true,
+        emun: ['Administrator', 'User']
+    },
     name: {
         type: String,
         required: [true, 'Name is required']
@@ -43,5 +48,10 @@ const UserSchema = Schema ({
         default: null
     }
 })
+UserSchema.methods.toJSON = function() {
+    const {__v, password,_id,... user} = this.toObject()
+    user.uid = _id
+    return user
+}
 
 module.exports = model('User', UserSchema)

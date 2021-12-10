@@ -1,22 +1,6 @@
 const User = require('../../models/ModelSchemas/user')
 const bcrypt = require('bcryptjs')
 
-const authenticate = (req,resp) => {
-    try {
-        //TODO auth
-        const jwt = '123456789'
-        resp.status(200).json({
-            msg: 'Authenticated!',
-            token: jwt
-         })
-
-    } catch (err) {
-        resp.status(400).json({
-            msg: err
-         })
-    }
-}
-
 const createUser = async(req, resp) => {
         const {username, name, email, surname, password} = req.body
         const user = new User({username, name, email, surname, password})
@@ -66,7 +50,6 @@ const getEncryptedPassword = (password) => {
 }
 
 module.exports = {
-    authenticate,
     createUser,
     updateUser,
     getUsers,
