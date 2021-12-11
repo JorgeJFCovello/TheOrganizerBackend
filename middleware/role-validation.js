@@ -1,7 +1,7 @@
 const { response } = require('express')
 require('dotenv').config()
 
-const validateAdminUser = async (req,resp = response, next) => {
+const validateAdminUser = (req,resp = response, next) => {
     try {
         if(!req.user) {
             return resp.status(500).json({msg: 'Error authenticating user'})
@@ -16,7 +16,7 @@ const validateAdminUser = async (req,resp = response, next) => {
     }
 }
 
-const hasRoleValidation = async (...roles) => {
+const hasRoleValidation = (...roles) => {
     return ( req,resp = response, next) => {
         try {
             if(!req.user) {

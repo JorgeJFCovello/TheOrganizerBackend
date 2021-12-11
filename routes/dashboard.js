@@ -2,7 +2,7 @@ const {Router} = require('express')
 const router = Router()
 const {check} = require('express-validator')
 const { dashboardExists } = require('../database/validators/existence-validator')
-const { validateFields,validateJWT,validateAdminUser,hasRoleValidation } = require('../middleware')
+const { validateFields,validateJWT,validateAdminUser } = require('../middleware')
 const {
     createDashboard,
     deleteDashboard,

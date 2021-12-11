@@ -1,7 +1,8 @@
 const User = require('../../models/ModelSchemas/user')
 const bcrypt = require('bcryptjs')
+const { response } = require('express')
 
-const createUser = async(req, resp) => {
+const createUser = async(req, resp = response = response) => {
         const {username, name, email, surname, password} = req.body
         const user = new User({username, name, email, surname, password})
         user.password = getEncryptedPassword(password)
@@ -9,7 +10,7 @@ const createUser = async(req, resp) => {
         resp.status(200).json({msg: 'User created successfully'})
 }
 
-const updateUser = async(req, resp) => {
+const updateUser = async(req, resp = response) => {
     const { id } = req.params
     const {_id, google, password, ... others} = req.body
     if (password) {
@@ -19,7 +20,7 @@ const updateUser = async(req, resp) => {
     resp.status(200).json({msg: 'User updated successfully'})
 }
 
-const getUsers = async(req, resp) => {
+const getUsers = async(req, resp = response) => {
     const {limit = 5, page = 1} = req.query
     const condition = {active : true}
     const [ users, total ] = await Promise.all([
@@ -34,7 +35,7 @@ const getUsers = async(req, resp) => {
     })
 }
 
-const deleteUser = async(req,resp) => {
+const deleteUser = async(req, resp = response) => {
     const {id} = req.params
     // we should not use User.findByIdAndDelete(id) because we lose all tracked data
     await User.findByIdAndUpdate(id, {active: false}) 
